@@ -1,11 +1,11 @@
 services:
-  - type: web  # Use 'worker' if it's a background bot (like a Telegram bot)
+  - type: web
     name: RAGNAROK-Bot
-    env: python  # Python environment
+    env: python
     buildCommand: |
-      pip install telebot flask pymango
-      chmod +x RAGNAROK  # Make binary executable
+      pip install -r requirements.txt
+      chmod +x RAGNAROK  # Make the binary executable
     startCommand: |
-      ./RAGNAROK && python3 RAGNAROK.py  # Run binary and Python script
-    region: singapore  # Choose your preferred Render region
-    plan: free  # Use the free plan for testing or small workloads
+      python3 RAGNAROK.py  # Directly start your Python script
+    region: oregon
+    plan: free
