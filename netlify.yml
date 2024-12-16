@@ -6,7 +6,7 @@ build:
   command: |
     # Install Python dependencies
     python3 -m pip install --upgrade pip
-    pip install telebot pymongo aiohttp
+    pip install telebot flask pymongo aiohttp
 
     # Make binaries executable
     chmod +x your-binary-file-name
