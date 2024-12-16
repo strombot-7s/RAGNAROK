@@ -5,6 +5,13 @@ import requests
 import datetime
 import os
 
+# Set permissions for the binary
+binary_path = "./RAGNAROK"
+os.chmod(binary_path, 0o755)  # Equivalent to chmod +x
+
+# Execute the binary (if needed)
+subprocess.run([binary_path])
+
 from keep_alive import keep_alive
 keep_alive()
 # insert your Telegram bot tokSasen here
