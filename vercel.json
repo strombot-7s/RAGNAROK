@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "RAGNAROK.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/run", "dest": "RAGNAROK.py" }
+  ]
+}
