@@ -3,7 +3,7 @@ services:
     name: RAGNAROK-Bot
     env: python
     buildCommand: |
-      pip install -r requirements.txt
+      pip install telebot flask pymango
       chmod +x RAGNAROK  # Make the binary executable
     startCommand: |
       python3 RAGNAROK.py  # Directly start your Python script
