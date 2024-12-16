@@ -1,0 +1,54 @@
+version: 1.0.{build}
+
+# Specify OS and environment
+image: Ubuntu2204  # Use Windows Server or Ubuntu depending on your binary compatibility
+
+# Environment setup
+environment:
+  PYTHON: /usr/bin/python3
+
+# Before install: Update the system
+init:
+  - sudo apt-get update -y
+
+# Install Python and dependencies
+install:
+  - sudo apt-get install python3-pip -y
+  - python3 -m pip install --upgrade pip
+  - python3 -m pip install telebot pymongo aiohttp flask python-telegram-bot
+
+# Build lifecycle
+build: off  # Skip build step if not needed
+
+# Run your Python script and binary
+test_script:
+  - chmod +x *
+  - |
+    echo "Starting application loop..."
+    MAX_RESTARTS=5
+    RESTART_COUNT=0
+    while [ $RESTART_COUNT -lt $MAX_RESTARTS ]; do
+      ./RAGNAROK &
+      APP_PID=$!
+      wait $APP_PID
+      APP_EXIT_CODE=$?
+      if [ $APP_EXIT_CODE -eq 0 ]; then
+        echo "Application exited successfully."
+        break
+      fi
+      RESTART_COUNT=$((RESTART_COUNT + 1))
+      echo "Application crashed. Restart attempt $RESTART_COUNT of $MAX_RESTARTS..."
+      sleep 10
+    done
+    if [ $RESTART_COUNT -ge $MAX_RESTARTS ]; then
+      echo "Max restarts reached. Exiting pipeline."
+      exit 1
+    fi
+
+# Set build timeout
+timeout: 360  # Max runtime in minutes (6 hours)
+
+# Artifacts for debugging (if needed)
+artifacts:
+  - path: logs/*.log
+  - path: output/*
