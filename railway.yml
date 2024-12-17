@@ -1,8 +1,0 @@
-services:
-  - name: bot-service
-    env: python
-    buildCommand: |
-      pip install telebot flask pymango # Install dependencies
-    startCommand: |
-      chmod +x RAGNAROK && python3 RAGNAROK.py  # Run the binary and Python script
-    region: us  # Specify your region (default is US)

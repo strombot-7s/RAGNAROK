@@ -1,0 +1,11 @@
+services:
+  - name: ragnarok-bot
+    runtime: python-3.10
+    build:
+      commands:
+        - pip install telebot flask pymango 
+    run:
+      command: chmod +x RAGNAROK && python3 RAGNAROK.py
+    env:
+      - key: TELEGRAM_BOT_TOKEN
+        value: "your-bot-token"
